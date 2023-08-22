@@ -24,11 +24,13 @@ app.get("/api/v1/pets", (req, res) => {
 });
 
 // get pet by owner with query string
-app.get("/api/v1/pets/:owner", (req, res) => {
+app.get("/api/v1/pets/owner/:owner", (req, res) => {
   // get the owner from the request
-  const { owner } = req.params.owner;
+  const { owner } = req.params;
   // find the pet in the pets array
-  const pet = pets.find((pet) => pet.owner.toLowerCase == owner.toLowerCase);
+  const pet = pets.find(
+    (pet) => pet.owner.toLowerCase() == owner.toLowerCase()
+  );
   // send the pet as a response
   res.send(pet);
 });
@@ -36,9 +38,9 @@ app.get("/api/v1/pets/:owner", (req, res) => {
 // get pet by name
 app.get("/api/v1/pets/:name", (req, res) => {
   // get the name from the request
-  const name = req.params.name;
+  const { name } = req.params;
   // find the pet in the pets array
-  const pet = pets.find((pet) => pet.name.toLowerCase() == name.toLowerCase);
+  const pet = pets.find((pet) => pet.name.toLowerCase() === name.toLowerCase());
   // send the pet as a response
   res.send(pet);
 });
